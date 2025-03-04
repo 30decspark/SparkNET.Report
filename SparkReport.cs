@@ -4,16 +4,16 @@ namespace SparkNET.Report
 {
     public class SparkReport : IDisposable
     {
-        private Dictionary<string, string> _parameters = [];
+        private Dictionary<string, string?> _parameters = [];
         private readonly List<ReportDataSource> _dataSources = [];
         private bool _disposed = false;
 
-        public string ReportPath { get; set; }
-        public string ReportName { get; set; }
+        public string ReportPath { get; set; } = string.Empty;
+        public string ReportName { get; set; } = string.Empty;
         public bool EnableExternalImages { get; set; }
         public bool EnableHyperlinks { get; set; }
 
-        public void SetParameters(Dictionary<string, string> parameters)
+        public void SetParameters(Dictionary<string, string?> parameters)
         {
             if (parameters == null || parameters.Count == 0)
             {
@@ -34,14 +34,14 @@ namespace SparkNET.Report
             _dataSources.Add(new ReportDataSource(datasetName, source));
         }
 
-        public (byte[] data, string mimeType, string fileName) Render(string format = "PDF")
+        public (byte[] data, string mimeType, string fileName) Render(string format = "pdf")
         {
             (string type, string mimeType, string extension) = format switch
             {
-                "EXCEL" => ("EXCELOPENXML", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "xlsx"),
-                "HTML" => ("HTML5", "text/html", "html"),
-                "PDF" => ("PDF", "application/pdf", "pdf"),
-                "WORD" => ("WORDOPENXML", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"),
+                "xlsx" => ("EXCELOPENXML", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "xlsx"),
+                "html" => ("HTML5", "text/html", "html"),
+                "pdf" => ("PDF", "application/pdf", "pdf"),
+                "docx" => ("WORDOPENXML", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"),
                 _ => throw new ArgumentException($"Format '{format}' is not supported.", nameof(format))
             };
 
@@ -65,7 +65,7 @@ namespace SparkNET.Report
 
                 string fileName = (ReportName ?? Path.GetFileNameWithoutExtension(ReportPath)) + "." + extension;
                 return (report.Render(type), mimeType, fileName);
-            } 
+            }
             catch (Exception ex)
             {
                 throw new Exception(GetExceptionMessage(ex));

@@ -14,4 +14,5 @@ using var report = new SparkReprt();
 report.ReportPath = "Test.rdlc";
 
 // Render the report in PDF format
-byte[] pdfReport = report.Render("PDF").data;
+byte[] pdfReport = report.Render("pdf").data;
+```

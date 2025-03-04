@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-	<PackageId>SparkNET.Report</PackageId>
-	<Version>1.0.0</Version>
-	<Authors>30decspark</Authors>
-	<RepositoryUrl>https://github.com/30decspark/SparkNET.Report</RepositoryUrl>
+    <Nullable>enable</Nullable>
+	  <PackageId>SparkNET.Report</PackageId>
+	  <Version>2.0.0</Version>
+	  <Authors>30decspark</Authors>
+	  <RepositoryUrl>https://github.com/30decspark/SparkNET.Report</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
