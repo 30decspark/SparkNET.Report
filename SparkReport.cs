@@ -4,7 +4,7 @@ namespace SparkNET.Report
 {
     public class SparkReport : IDisposable
     {
-        private Dictionary<string, string?> _parameters = [];
+        private ReportParameters _parameters = new();
         private readonly List<ReportDataSource> _dataSources = [];
         private bool _disposed = false;
 
@@ -13,13 +13,8 @@ namespace SparkNET.Report
         public bool EnableExternalImages { get; set; }
         public bool EnableHyperlinks { get; set; }
 
-        public void SetParameters(Dictionary<string, string?> parameters)
+        public void SetParameters(ReportParameters parameters)
         {
-            if (parameters == null || parameters.Count == 0)
-            {
-                throw new ArgumentException("Parameters cannot be null or empty.", nameof(parameters));
-            }
-
             _parameters = parameters;
         }
 
@@ -53,9 +48,9 @@ namespace SparkNET.Report
                 report.EnableExternalImages = EnableExternalImages;
                 report.EnableHyperlinks = EnableHyperlinks;
 
-                if (_parameters.Count > 0)
+                if (_parameters.Count() > 0)
                 {
-                    report.SetParameters(_parameters.Select(p => new ReportParameter(p.Key, p.Value)).ToList());
+                    report.SetParameters(_parameters.ToList());
                 }
 
                 if (_dataSources.Count > 0)
