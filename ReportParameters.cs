@@ -8,7 +8,7 @@ namespace SparkNET.Report
 
         public void Add(string name, string? value)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Parameter name cannot be null or empty.", nameof(name));
             }

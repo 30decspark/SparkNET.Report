@@ -7,17 +7,17 @@ To use **SparkNET.Report** for rendering reports.
 ```csharp
 using SparkNET.Report;
 
-// List of data
+// Report parameters
+var param = new ReportParameters();
+param.Add("TITLE", "Testing report");
+
+// Report data
 List<Person> people = new List<Person>
 {
     new Person { Name = "John", Age = 30 },
     new Person { Name = "Alice", Age = 25 },
     new Person { Name = "Bob", Age = 40 }
 };
-
-// Report parameters
-var param = new ReportParameters();
-param.Add("TITLE", "Testing report");
 
 // Create a report
 using var report = new SparkReprt();
